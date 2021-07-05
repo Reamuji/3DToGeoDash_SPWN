@@ -78,7 +78,17 @@ for i in vertices{
 //followCam.lock_to_player(lock_y = false, lock_x = true)
 
 //the last thing to do is to think of some mechanism to move the triaxis
-//i did it manually for now
+
+//script for rotating test
+        -> zFollow.move(x = -10,y = 0, duration = 0.5, easing = SINE_OUT)
+        wait (0.5)
+        -> xFollow.move(x = -20, y = 0, duration = 1, easing = SINE_IN_OUT)
+        wait (0.5)
+        -> zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
+        wait (0.5)
+        -> xFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
+        wait (0.5)
+        -> zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
 
 /* script for rotating test
     //proper script for rotating test
