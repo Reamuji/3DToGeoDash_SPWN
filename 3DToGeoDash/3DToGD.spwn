@@ -113,7 +113,7 @@ for i in vertices{
         wait (0.5)
         -> xFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
         wait (0.5)
-        -> zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
+        -> zFollow.move(x = -20,y = 0, duration = 1, easing = SINE_IN_OUT)
 
 /* script for rotating test
     //proper script for rotating test
@@ -124,7 +124,7 @@ for i in vertices{
         wait (0.5)
         -> xFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
         wait (0.5)
-        -> zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
+        -> zFollow.move(x = -20,y = 0, duration = 1, easing = SINE_IN_OUT)
     //ima just add this manually
     //wrong ver, only for reference
         xFollow.move(x = -20, y = 0, duration = 1, easing = SINE_IN_OUT)
