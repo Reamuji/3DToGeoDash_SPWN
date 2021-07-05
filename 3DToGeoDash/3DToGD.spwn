@@ -1,0 +1,102 @@
+extract obj_props
+extract $
+
+//.obj file to read
+//you have to put it on whatever directory written on your terminal. if you know how to fix this pls help xd idk how to deal with directpry
+model = readfile("Human.obj")
+
+//model placing offset
+xOffset = 210
+yOffset = 150
+
+//for resizing the model in the level
+rescale = 2/3
+
+
+// xyz pos of the 3D model vertices
+//actually [num in list][0 = "v" |1 = x|2 = y|3 = z]
+let vertices = []
+
+//for some weird reason 1 block = 30 unit
+blockSize  = 30
+
+//function to read vertices position
+readobj = (file) {
+    let lines = file.split("\n")
+    for i in lines {
+        //the i!="" is for bugfixing
+        if i!="" && i.starts_with("v ") {
+            let part = i.split(" ")
+            let coor = []
+            for j in part{
+                if j!="v"{
+                    coor.push(j)
+                }
+            }
+            vertices.push(coor)
+        }
+    }
+}
+
+//3 obj that govern how the model rotate in 3 dimension
+//ill call em triaxis
+xFollow = 1g
+yFollow = 2g
+zFollow = 3g
+
+//i made a group to move the model following player x, but it cause an issue
+//followCam = ?g
+
+readobj(model)
+
+for i in vertices{
+    newGroup = ?g
+    //daGroup = [followCam, newGroup]
+
+    //for convenience
+    xNum = i[0] as @number * rescale
+    yNum = i[1] as @number * rescale
+    zNum = i[2] as @number * rescale
+
+    //create a circle
+    add(
+        obj{
+            OBJ_ID: 1764,    
+            X: xNum * blockSize + xOffset,
+            Y: yNum * blockSize + yOffset,
+            GROUPS: newGroup
+            //GROUPS: daGroup
+        }
+    )
+
+    //3 follow. following each triaxis
+    newGroup.follow(xFollow,xNum,xNum)
+    newGroup.follow(yFollow,yNum,yNum)
+    newGroup.follow(zFollow,zNum,zNum)
+}
+
+//followCam.lock_to_player(lock_y = false, lock_x = true)
+
+//the last thing to do is to think of some mechanism to move the triaxis
+//i did it manually for now
+
+/* script for rotating test
+    //proper script for rotating test
+        -> zFollow.move(x = -10,y = 0, duration = 0.5, easing = SINE_OUT)
+        wait (0.5)
+        -> xFollow.move(x = -20, y = 0, duration = 1, easing = SINE_IN_OUT)
+        wait (0.5)
+        -> zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
+        wait (0.5)
+        -> xFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
+        wait (0.5)
+        -> zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
+    //ima just add this manually
+    //wrong ver, only for reference
+        xFollow.move(x = -20, y = 0, duration = 1, easing = SINE_IN_OUT)
+        xFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
+
+        zFollow.move(x = -10,y = 0, duration = 0.5, easing = SINE_OUT)
+        zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
+        zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
+*/
