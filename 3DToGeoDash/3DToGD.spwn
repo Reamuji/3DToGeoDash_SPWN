@@ -43,6 +43,32 @@ readobj = (file) {
 xFollow = 1g
 yFollow = 2g
 zFollow = 3g
+    //create triaxis obj
+    add(
+        obj{
+            OBJ_ID: 1764,    
+            X: 60,
+            Y: 30,
+            GROUPS: xFollow
+        }
+    )
+    add(
+        obj{
+            OBJ_ID: 1764,    
+            X: 30,
+            Y: 60,
+            GROUPS: yFollow
+        }
+    )
+    add(
+        obj{
+            OBJ_ID: 1764,    
+            X: 30,
+            Y: 30,
+            GROUPS: zFollow
+        }
+    )
+
 
 //i made a group to move the model following player x, but it cause an issue
 //followCam = ?g
