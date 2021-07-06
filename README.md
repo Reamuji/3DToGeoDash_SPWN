@@ -14,6 +14,19 @@ you can message me on discord Reamuji#9847 for whatever reason
 
 you might need to change the offset and resize value based on your model size. i might gonna add some sort of auto size detection system in the future
 
+## How to rotate it
+This one is a bit complicated, but ill try to explain it.
+
+So there's 3 object that i call triaxis, they are the obj that govern how the model would rotate. imagine a transparent ball, and you stick a smaller ball on top, right and front of it. these 3 ball are the triaxis, and if you rotate the ball, the triaxis would move right ? that movement is what make the illusion of the model rotating in 3D.
+
+X triaxis (the one you stick on right) = group 1
+
+Y triaxis (the one you stick on top) = group 2
+
+Z triaxis (the one you stick on front) = group 3
+
+the simplest movement you could do (which already written in the code) is moving X & Z triaxis oscillating left and right (with proper easing) which would make the illusion of the model rotating on the Y axis
+
 ## Thing to add
 #### - system to rotate the triaxis
   im not sure how
