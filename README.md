@@ -10,14 +10,14 @@ you can message me on discord Reamuji#9847 for whatever reason
 ## How to use it
 1. Put your model on whatever directory written on your terminal.
    pls help, idk how to deal with directory xd
-2. type 'spwn build 3DToGD.spwn into the terminal.
+2. type "spwn build 3DToGD.spwn" into the terminal.
 
 you might need to change the offset and resize value based on your model size. i might gonna add some sort of auto size detection system in the future
 
 ## How to rotate it
 This one is a bit complicated, but ill try to explain it.
 
-So there's 3 object that i call triaxis, they are the obj that govern how the model would rotate. imagine a transparent ball, and you stick a smaller ball on top, right and front of it. these 3 ball are the triaxis, and if you rotate the ball, the triaxis would move right ? that movement is what make the illusion of the model rotating in 3D.
+So there's 3 object that i call triaxis, they are the obj that govern how the model would rotate. imagine a transparent ball (diameter = 2 block), and then you stick a smaller ball on top, right and front of it. these 3 ball are the triaxis, and if you rotate the ball, the triaxis would move right ? that movement is what make the illusion of the model rotating in 3D.
 
 X triaxis (the one you stick on right) = group 1
 
