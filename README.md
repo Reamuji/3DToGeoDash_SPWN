@@ -1,6 +1,8 @@
 # 3DToGeoDash_SPWN
 convert .obj file into a gd level. and you can rotate it in 3 dimention inside the level
 
+blender has the option to export as .obj file just in case you don't know
+
 made with some unauthorized help from https://github.com/patrickbies/spwn-3d lol. 
 idk how to read a file, so i take a peek to those who was already there before me. 
 btw you should check out that project, it much cooler than the one you're looking at rn
@@ -17,7 +19,7 @@ you might need to change the offset and resize value based on your model size. i
 ## How to rotate it
 This one is a bit complicated, but ill try to explain it.
 
-So there's 3 object that i call triaxis, they are the obj that govern how the model would rotate. imagine a transparent ball (diameter = 2 block), and then you stick a smaller ball on top, right and front of it. these 3 ball are the triaxis, and if you rotate the ball, the triaxis would move right ? that movement is what make the illusion of the model rotating in 3D.
+So there's 3 object that i call triaxis, they are the obj that govern how the model would rotate. imagine a transparent ball (diameter = 2 block), and then you stick a smaller ball on top, right and front of it. these 3 ball are the triaxis, and if you rotate the ball, the triaxis would move right ? that movement is what make the illusion of the model rotating in 3D. now you need to emulate that movement in 2D
 
 X triaxis (the one you stick on right) = group 1
 
