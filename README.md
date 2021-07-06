@@ -17,7 +17,8 @@ you can message me on discord Reamuji#9847 for whatever reason
 you might need to change the offset and resize value based on your model size. i might gonna add some sort of auto size detection system in the future
 
 ## How to rotate it
-This one is a bit complicated, but ill try to explain it.
+This one is a bit complicated, but ill try to explain it./n
+the script itself already has a simple rotation built in tho.
 
 So there's 3 object that i call triaxis, they are the obj that govern how the model would rotate. imagine a transparent ball (diameter = 2 block), and then you stick a smaller ball on top, right and front of it. these 3 ball are the triaxis, and if you rotate the ball, the triaxis would move right ? that movement is what make the illusion of the model rotating in 3D. now you need to emulate that movement in 2D
 
