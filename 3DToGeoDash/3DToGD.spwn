@@ -70,14 +70,13 @@ zFollow = 3g
     )
 
 
-//i made a group to move the model following player x, but it cause an issue
-//followCam = ?g
+followCam = ?g
 
 readobj(model)
 
 for i in vertices{
     newGroup = ?g
-    //daGroup = [followCam, newGroup]
+    daGroup = [followCam, newGroup]
 
     //for convenience
     xNum = i[0] as @number * rescale
@@ -90,8 +89,8 @@ for i in vertices{
             OBJ_ID: 1764,    
             X: xNum * blockSize + xOffset,
             Y: yNum * blockSize + yOffset,
-            GROUPS: newGroup
-            //GROUPS: daGroup
+            //GROUPS: newGroup
+            GROUPS: daGroup
         }
     )
 
@@ -101,36 +100,18 @@ for i in vertices{
     newGroup.follow(zFollow,zNum,zNum)
 }
 
-//followCam.lock_to_player(lock_y = false, lock_x = true)
+followCam.lock_to_player(lock_y = false, lock_x = true)
 
 //the last thing to do is to think of some mechanism to move the triaxis
 
 //script for rotating test
-        -> zFollow.move(x = -10,y = 0, duration = 0.5, easing = SINE_OUT)
-        -> xFollow.move(x = -20, y = 0, duration = 1, easing = SINE_IN_OUT)
-        wait (0.5)
-        -> zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
-        wait (0.5)
-        -> xFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
-        wait (0.5)
-        -> zFollow.move(x = -20,y = 0, duration = 1, easing = SINE_IN_OUT)
+-> while_loop(() => true, () {
+    xFollow.move(x = -20, y = 0, duration = 1, easing = SINE_IN_OUT)
+    xFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
+})
 
-/* script for rotating test
-    //proper script for rotating test
-        -> zFollow.move(x = -10,y = 0, duration = 0.5, easing = SINE_OUT)
-        -> xFollow.move(x = -20, y = 0, duration = 1, easing = SINE_IN_OUT)
-        wait (0.5)
-        -> zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
-        wait (0.5)
-        -> xFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
-        wait (0.5)
-        -> zFollow.move(x = -20,y = 0, duration = 1, easing = SINE_IN_OUT)
-    //ima just add this manually
-    //wrong ver, only for reference
-        xFollow.move(x = -20, y = 0, duration = 1, easing = SINE_IN_OUT)
-        xFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
-
-        zFollow.move(x = -10,y = 0, duration = 0.5, easing = SINE_OUT)
-        zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
-        zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
-*/
+zFollow.move(x = -10,y = 0, duration = 0.5, easing = SINE_OUT)
+-> while_loop(() => true, () {
+    zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
+    zFollow.move(x = -20,y = 0, duration = 1, easing = SINE_IN_OUT)
+})
