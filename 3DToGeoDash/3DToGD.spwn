@@ -13,8 +13,8 @@ yOffset = 150
 rescale = 2/3
 
 
-// xyz pos of the 3D model vertices
-//actually [num in list][0 = "v" |1 = x|2 = y|3 = z]
+// xyz pos of the 3D model vertices (taken from the file)
+// usage : vertices[index][0 = "v" |1 = x|2 = y|3 = z]
 let vertices = []
 
 //for some weird reason 1 block = 30 unit
@@ -102,7 +102,7 @@ for i in vertices{
 
 followCam.lock_to_player(lock_y = false, lock_x = true)
 
-//the last thing to do is to think of some mechanism to move the triaxis
+//the last thing to do is to think of some mechanism to move the triaxis conveniently
 
 //script for rotating test
 -> while_loop(() => true, () {
