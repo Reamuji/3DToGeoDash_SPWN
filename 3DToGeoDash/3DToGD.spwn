@@ -2,22 +2,22 @@ extract obj_props
 extract $
 
 //.obj file to read
-//you have to put it on whatever directory written on your terminal. if you know how to fix this pls help xd idk how to deal with directpry
 model = readfile("Human.obj")
 
 //model placing offset
 xOffset = 210
-yOffset = 150
+yOffset = 160
 
-//for resizing the model in the level
-rescale = 2/3
+// for resizing the model generated
+rescale = 1/2
 
+// add cool glow lol
+glowMode = true
 
-// xyz pos of the 3D model vertices (taken from the file)
-// usage : vertices[index][0 = "v" |1 = x|2 = y|3 = z]
+// xyz pos of the 3D model vertices
+// vertices [index][0 = x |1 = y|2 = z]
 let vertices = []
 
-//for some weird reason 1 block = 30 unit
 blockSize  = 30
 
 //function to read vertices position
@@ -29,8 +29,9 @@ readobj = (file) {
             let part = i.split(" ")
             let coor = []
             for j in part{
-                if j!="v"{
-                    coor.push(j)
+                if j != "v"{
+                    k = j as @number
+                    coor.push(k)
                 }
             }
             vertices.push(coor)
@@ -70,30 +71,63 @@ zFollow = 3g
     )
 
 
+//i made a group to move the model following player x, but it cause an issue
 followCam = ?g
 
 readobj(model)
+
+verticesColor = ?c
+
+if glowMode{
+    verticesColor.set(0, 35, 70, 0, 1, true)
+    BG.set(0,0,0)
+}
 
 for i in vertices{
     newGroup = ?g
     daGroup = [followCam, newGroup]
 
     //for convenience
-    xNum = i[0] as @number * rescale
-    yNum = i[1] as @number * rescale
-    zNum = i[2] as @number * rescale
+    xNum = i[0] * rescale
+    yNum = i[1] * rescale
+    zNum = i[2] * rescale
 
-    //create a circle
+    //create a ball
     add(
         obj{
             OBJ_ID: 1764,    
             X: xNum * blockSize + xOffset,
             Y: yNum * blockSize + yOffset,
-            //GROUPS: newGroup
+            COLOR_2: verticesColor,
             GROUPS: daGroup
+            //GROUPS: newGroup
         }
     )
 
+    if glowMode{
+        add(
+            obj{
+                OBJ_ID: 1887,    
+                X: xNum * blockSize + xOffset,
+                Y: yNum * blockSize + yOffset,
+                COLOR_2: verticesColor,
+                GROUPS: daGroup
+                //GROUPS: newGroup
+            }
+        )
+
+        add(
+            obj{
+                OBJ_ID: 1888,    
+                X: xNum * blockSize + xOffset,
+                Y: yNum * blockSize + yOffset,
+                COLOR_2: verticesColor,
+                GROUPS: daGroup,
+                //GROUPS: newGroup,
+                SCALING: 2
+            }
+        )
+    }
     //3 follow. following each triaxis
     newGroup.follow(xFollow,xNum,xNum)
     newGroup.follow(yFollow,yNum,yNum)
@@ -102,7 +136,8 @@ for i in vertices{
 
 followCam.lock_to_player(lock_y = false, lock_x = true)
 
-//the last thing to do is to think of some mechanism to move the triaxis conveniently
+//the last thing to do is to think of some mechanism to move the triaxis
+
 
 //script for rotating test
 -> while_loop(() => true, () {
