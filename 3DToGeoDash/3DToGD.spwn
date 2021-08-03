@@ -125,7 +125,6 @@ for i in vertices{
                 COLOR_2: verticesColor,
                 GROUPS: daGroup,
                 //GROUPS: newGroup,
-                SCALING: 2
             }
         )
     }
