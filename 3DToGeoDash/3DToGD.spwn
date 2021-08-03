@@ -79,7 +79,7 @@ readobj(model)
 verticesColor = ?c
 
 if glowMode{
-    verticesColor.set(0, 35, 70, 0, 1, true)
+    verticesColor.set(15,25,30, 0, 1, true)
     BG.set(0,0,0)
 }
 
