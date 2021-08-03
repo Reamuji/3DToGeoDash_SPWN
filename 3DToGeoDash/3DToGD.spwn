@@ -4,15 +4,16 @@ extract $
 //.obj file to read
 model = readfile("Human.obj")
 
+// add cool glow lol
+// you need to set the color by yourself though. idk why it never works
+glowMode = true
+
 //model placing offset
 xOffset = 210
 yOffset = 160
 
 // for resizing the model generated
 rescale = 1/2
-
-// add cool glow lol
-glowMode = true
 
 // xyz pos of the 3D model vertices
 // vertices [index][0 = x |1 = y|2 = z]
