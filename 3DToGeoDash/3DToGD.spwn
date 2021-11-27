@@ -2,11 +2,11 @@ extract obj_props
 extract $
 
 //.obj file to read
-model = readfile("Human.obj")
+model = readfile("model/cube.obj")
 
 // add cool glow lol
 // you need to set the color by yourself though. idk why it never works
-glowMode = true
+glowMode = false
 
 //model placing offset
 xOffset = 210
@@ -16,67 +16,68 @@ yOffset = 160
 rescale = 1/2
 
 // xyz pos of the 3D model vertices
-// vertices [index][0 = x |1 = y|2 = z]
+// vertices [index].(axis)      example : vertices[4].x
 let vertices = []
 
+linebreak = readfile("linebreak.txt") //bugfixing xd    | \n didn't always work properly
 blockSize  = 30
 
-//function to read vertices position
-readobj = (file) {
-    let lines = file.split("\n")
-    for i in lines {
-        //the i!="" is for bugfixing
-        if i!="" && i.starts_with("v ") {
-            let part = i.split(" ")
-            let coor = []
-            for j in part{
-                if j != "v"{
-                    k = j as @number
-                    coor.push(k)
-                }
-            }
-            vertices.push(coor)
+//Read vertices position
+
+let lines = model.split(linebreak)
+if lines.length == 1 {
+    lines = model.split("\n")
+    //lines = model.split("\r")
+}
+for line in lines{
+    if line.starts_with("v ") {
+    //  if is faster
+    // .filter(i => i.starts_with("v ")) {
+        let part = line.split(" ")
+
+        let coor = {
+            x:part[1] as @number,
+            y:part[2] as @number,
+            z:part[3] as @number,
         }
+        vertices.push(coor)
     }
 }
+print(vertices.length)
+//  3 obj that represent 3 dimension, will govern how the model rotate in 3 dimension
+//  i will refer them as triaxis
+xFollow = ?g
+yFollow = ?g
+zFollow = ?g
 
-//3 obj that govern how the model rotate in 3 dimension
-//ill call em triaxis
-xFollow = 1g
-yFollow = 2g
-zFollow = 3g
-    //create triaxis obj
-    add(
-        obj{
-            OBJ_ID: 1764,    
-            X: 60,
-            Y: 30,
-            GROUPS: xFollow
-        }
-    )
-    add(
-        obj{
-            OBJ_ID: 1764,    
-            X: 30,
-            Y: 60,
-            GROUPS: yFollow
-        }
-    )
-    add(
-        obj{
-            OBJ_ID: 1764,    
-            X: 30,
-            Y: 30,
-            GROUPS: zFollow
-        }
-    )
+//create triaxis obj on level
+add(
+    obj{
+        OBJ_ID: 1764,    
+        X: 60,
+        Y: 30,
+        GROUPS: xFollow
+    }
+)
+add(
+    obj{
+        OBJ_ID: 1764,    
+        X: 30,
+        Y: 60,
+        GROUPS: yFollow
+    }
+)
+add(
+    obj{
+        OBJ_ID: 1764,    
+        X: 30,
+        Y: 30,
+        GROUPS: zFollow
+    }
+)
 
 
-//i made a group to move the model following player x, but it cause an issue
 followCam = ?g
-
-readobj(model)
-
 verticesColor = ?c
 
 if glowMode{
@@ -84,16 +85,17 @@ if glowMode{
     BG.set(0,0,0)
 }
 
-for i in vertices{
+//  iterate through all vertices cooridinate
+for coordinate in vertices{
     newGroup = ?g
     daGroup = [followCam, newGroup]
 
     //for convenience
-    xNum = i[0] * rescale
-    yNum = i[1] * rescale
-    zNum = i[2] * rescale
+    xNum = coordinate.x * rescale
+    yNum = coordinate.y * rescale
+    zNum = coordinate.z * rescale
 
-    //create a ball
+    //create the ball
     add(
         obj{
             OBJ_ID: 1764,    
@@ -104,6 +106,7 @@ for i in vertices{
             //GROUPS: newGroup
         }
     )
+
 
     if glowMode{
         add(
@@ -116,7 +119,6 @@ for i in vertices{
                 //GROUPS: newGroup
             }
         )
-
         add(
             obj{
                 OBJ_ID: 1888,    
@@ -128,7 +130,7 @@ for i in vertices{
             }
         )
     }
-    //3 follow. following each triaxis
+    //3 follow. for following each triaxis
     newGroup.follow(xFollow,xNum,xNum)
     newGroup.follow(yFollow,yNum,yNum)
     newGroup.follow(zFollow,zNum,zNum)
@@ -137,6 +139,7 @@ for i in vertices{
 followCam.lock_to_player(lock_y = false, lock_x = true)
 
 //the last thing to do is to think of some mechanism to move the triaxis
+
 
 
 //script for rotating test
