@@ -2,7 +2,7 @@ extract obj_props
 extract $
 
 //.obj file to read
-model = readfile("model/cube.obj")
+model = readfile("model/Human.obj")
 
 // add cool glow lol
 // you need to set the color by yourself though. idk why it never works
@@ -19,16 +19,18 @@ rescale = 1/2
 // vertices [index].(axis)      example : vertices[4].x
 let vertices = []
 
-linebreak = readfile("linebreak.txt") //bugfixing xd    | \n didn't always work properly
 blockSize  = 30
 
 //Read vertices position
-
-let lines = model.split(linebreak)
+//  linebreak can be confusing sometime
+let lines = model.split("\r\n")
 if lines.length == 1 {
     lines = model.split("\n")
-    //lines = model.split("\r")
 }
+if lines.length == 1 {
+    lines = model.split("\r")
+}
+
 for line in lines{
     if line.starts_with("v ") {
     //  if is faster
@@ -43,7 +45,7 @@ for line in lines{
         vertices.push(coor)
     }
 }
-print(vertices.length)
+
 //  3 obj that represent 3 dimension, will govern how the model rotate in 3 dimension
 //  i will refer them as triaxis
 xFollow = ?g
