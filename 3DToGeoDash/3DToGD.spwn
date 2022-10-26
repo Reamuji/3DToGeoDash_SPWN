@@ -145,13 +145,27 @@ followCam.lock_to_player(lock_y = false, lock_x = true)
 
 
 //script for rotating test
+zFollow.move(0,-5, duration = 1, easing = SINE_IN_OUT)
+
 -> while_loop(() => true, () {
     xFollow.move(x = -20, y = 0, duration = 1, easing = SINE_IN_OUT)
     xFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
 })
-
-zFollow.move(x = -10,y = 0, duration = 0.5, easing = SINE_OUT)
 -> while_loop(() => true, () {
-    zFollow.move(x = 20,y = 0, duration = 1, easing = SINE_IN_OUT)
-    zFollow.move(x = -20,y = 0, duration = 1, easing = SINE_IN_OUT)
+    zFollow.move(x = 0, y = 10, duration = 1, easing = SINE_IN_OUT)
+    zFollow.move(x = 0, y = -10, duration = 1, easing = SINE_IN_OUT)
+})
+
+-> xFollow.move(x = 0, y = -5, duration = 0.5, easing = SINE_OUT)
+-> zFollow.move(x = -10, y = 0, duration = 0.5, easing = SINE_OUT)
+
+wait(0.5)
+
+-> while_loop(() => true, () {
+    xFollow.move(x = 0, y = 10, duration = 1, easing = SINE_IN_OUT)
+    xFollow.move(x = 0, y = -10, duration = 1, easing = SINE_IN_OUT)
+})
+-> while_loop(() => true, () {
+    zFollow.move(x = 20, y = 0, duration = 1, easing = SINE_IN_OUT)
+    zFollow.move(x = -20, y = 0, duration = 1, easing = SINE_IN_OUT)
 })
