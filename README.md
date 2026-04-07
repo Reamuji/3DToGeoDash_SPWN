@@ -12,7 +12,7 @@ you can message me on discord Reamuji#9847 for whatever reason
 1. Put your .obj model file on whatever directory written on your terminal.  
    pls help, idk how to deal with directory xd  
    note : on latest SPWN commit it already updated so you could just put it in the same folder as the script 
-2. type "spwn build 3DToGD.spwn" into the terminal.
+2. type "spwn build 3DToGD.spwn --allow readfile" into the terminal.
 
 you might need to change the "offset" and "resize" value based on your model size. i might gonna add some sort of auto size detection system in the future
 
