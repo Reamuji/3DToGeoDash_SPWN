@@ -83,8 +83,8 @@ followCam = ?g
 verticesColor = ?c
 
 if glowMode{
-    verticesColor.set(15,25,30, 0, 1, true)
-    BG.set(0,0,0)
+    verticesColor.set(@chroma::from_rgb8(15,25,30), 0, true)
+    BG.set(@chroma::from_rgb8(0,0,0))
 }
 
 //  iterate through all vertices cooridinate
